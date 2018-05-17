@@ -1,0 +1,45 @@
+*{
+  color:#333;
+  font-size: 28px;
+  font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,sans-serif!important;
+}
+.wrapper{
+  color:#333;
+  font-size: 28px;
+  font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,sans-serif!important;
+}
+.icon{
+  font-family: iconfont!important;
+  font-size: 38px;
+  color: #778087
+}
+.padding-30{
+  padding: 30px;
+}
+.padding-top-20{
+  padding-top: 20px;
+}
+.padding-bottom-16{
+  padding-bottom: 16px;
+}
+.bg-fff{
+  background-color: #fff;  
+}
+.color-green{
+  color: #80bd01;
+}
+.avatar {
+  width: 94px;
+  height: 94px;
+  border-radius: 100%;
+}
+.flex-1{
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.flex-flex{
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;  
+}

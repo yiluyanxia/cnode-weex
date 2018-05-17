@@ -8,7 +8,7 @@
           <text class="other">/3877·20小时前</text> 
         </div>
       </div>
-      <div class="content">
+      <div class="content" @click="linkTo">
         <div class="title">
           <text class="txt" lines="2">为社区做贡献，帮社区写自动化测试代码为社区做贡献，帮社区写自动化测试代码</text>
         </div>
@@ -73,7 +73,11 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {}
+  methods: {
+    linkTo() {
+      this.$router.push("detail");
+    }
+  }
 };
 </script>
 
@@ -109,11 +113,11 @@ export default {
   align-content: flex-end;
 }
 
-.count .replies{
+.count .replies {
   font-size: 28px;
   color: #9e78c0;
 }
-.count .other{
+.count .other {
   font-size: 28px;
   color: #b4b4b4;
 }

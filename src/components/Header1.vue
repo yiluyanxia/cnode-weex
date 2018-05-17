@@ -1,25 +1,32 @@
 <template>
-  <div class="header">
-    <div class="iconbox">
-      <text class="icon menu">&#xe653;</text>
+  <div class="header flex-flex">
+    <div class="iconbox" @click="goBack">
+      <text class="icon menu">&#xe78a;</text>
     </div>
 
-    <div class="txtbox"><text class="txt">Cnode</text></div>
+    <div class="txtbox">
+      <text class="txt">话题</text>
+    </div>
+    <div class="iconbox righticon">
+      <text class="icon menu">&#xe624;</text>
+    </div>
 
   </div>
   
 </template>
 
 <script>
-
 export default {
   data() {
     return {};
   },
   computed: {},
   mounted() {},
-  methods: {},
- 
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    }
+  }
 };
 </script>
 
@@ -33,9 +40,6 @@ export default {
   width: 100%;
   height: 120px;
   background-color: #444;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
 }
 
 .iconbox {
@@ -48,7 +52,8 @@ export default {
 .header .txt {
   color: #fff;
   font-size: 42px;
-
+}
+.righticon {
 }
 </style>
 
