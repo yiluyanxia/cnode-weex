@@ -17,21 +17,21 @@
       </div>
       <div class="list padding-top-16">
 
-        <div class="item flex-flex active">
+        <div class="item flex-flex active" @click="linkTo('all')">
           <text class="icon">&#xe639;</text>
           <text class="txt">全部</text>
         </div>
-        <div class="item flex-flex">
+        <div class="item flex-flex" @click="linkTo('good')">
           <text class="icon">&#xe60c;</text>
           <text class="txt">精华</text>
         </div>
 
-        <div class="item flex-flex">
+        <div class="item flex-flex" @click="linkTo">
           <text class="icon">&#xe639;</text>
           <text class="txt">问答</text>
         </div>
 
-        <div class="item flex-flex border-bottom">
+        <div class="item flex-flex border-bottom" @click="linkTo('job')">
           <text class="icon">&#xe785;</text>
           <text class="txt">招聘</text>
         </div>
@@ -69,9 +69,17 @@ export default {
   computed: {},
   mounted() {},
   methods: {
-    close: function (){
+    close(){
       this.isShowSide = false
+    },
+    linkTo(){
+      let _this = this;
+      _this.isShowSide = false
+      console.log('this.isShowSide')
+      console.log( _this.isShowSide)
+    
     }
+
   }
 };
 </script>

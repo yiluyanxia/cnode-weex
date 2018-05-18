@@ -48,7 +48,7 @@ export default {
         page: 1,
         limit: 10,
         tab: "all",
-        mdrender: true
+        mdrender: false
       },
       topicsList: []
     };

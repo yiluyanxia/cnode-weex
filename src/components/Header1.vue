@@ -40,6 +40,10 @@ export default {
   width: 100%;
   height: 120px;
   background-color: #444;
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
 }
 
 .iconbox {
