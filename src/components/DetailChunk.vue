@@ -1,20 +1,24 @@
 <template>
-  <div class="detail-chunk padding-30 bg-fff">
+  <div v-if="topic" class="detail-chunk padding-30 bg-fff">
     <div class="title">
-      <text class="txt">为社区做贡献，帮社区写自动化测试代码为社区做贡献，帮社区写自动化测试代测试代码</text>
+      <text class="txt">{{topic.title}}</text>
     </div>
 
     <div class="infobox flex-flex">
       <div class="avatarbox">
-        <image  class="avatar" src="https://vuejs.org/images/logo.png"></image>
+        <image class="avatar" v-if="topic.author.avatar_url" :src="topic.author.avatar_url"></image>
+
       </div>
 
       <div class="userinfo">
         <div class="username">
-          <text class="tag">问答</text>
-          <text class="name">用户名</text>
+          <text class="tag" :class="matchTab(topic.tab, topic.top, topic.good, true)">
+           {{matchTab(topic.tab, topic.top, topic.good, false)}}
+          </text>
+
+          <text class="name">{{topic.author.loginname}}</text>
         </div>
-        <div class="info">55分钟前创建&nbsp;•&nbsp;55次浏览</div>
+        <div class="info">{{topic.create_at | formatDate}}创建&nbsp;•&nbsp;{{topic.visit_count}}次浏览</div>
       </div>
 
       <div class="collect">
@@ -23,7 +27,8 @@
       </div>
     </div>
 
-    <div class="content">加入cnodejs社区也快1年了，没对社区做过什么贡献，看到社区要公测，刚好自己在公司使用node.js做自动化测试。这次我要对社区贡献一套UI自动化代码，别人如果想自己搭建一套社区的话，可以直接运行这套UI自动化代码来检查UI功能。平时工作时间比较忙，所以本周日我计划要做如下的事情，为了让大家都能看懂我的代码，我会使用行为驱动测试的方式来写代码，完成之后的代码大致如下
+    <div class="content">
+      {{topic.content}}
     </div>
 
   </div>
@@ -31,13 +36,33 @@
 </template>
 
 <script>
+import * as apis from "../api/index";
+import util from "../config/util";
+
 export default {
+  props:["topic"],
   data() {
-    return {};
+    return {
+      // topic:{}
+    };
   },
   computed: {},
-  mounted() {},
-  methods: {}
+  mounted() {
+    // let params = this.$route.query.id;
+    // this.getList(params);
+    
+  },
+  methods: {
+     matchTab(tab, good, top, isClass) {
+      return util.matchTab(tab, good, top, isClass);
+    },
+    // getList: function(params) {
+    //   let _this = this;
+    //   apis.getTopic(params, function(retdata) {
+    //     _this.topic = retdata.data;     
+    //   });
+    // },
+  }
 };
 </script>
 
@@ -64,12 +89,22 @@ export default {
   padding-bottom: 10px;
 }
 .tag {
-  background-color: #eee;
+  padding: 2px 4px;
+  width: 70px;
+  height: 38px;
+  line-height: 38px;
   font-size: 24px;
+  background-color: #e5e5e5;
   border-radius: 6px;
-  padding: 3px 10px;
-  color: #838383;
+  text-align: center;
+  color: #999;
 }
+.light {
+  background-color: #80bd01;
+  color: #fff;
+}
+
+
 .name {
   color: #333;
   padding: 0 16px;

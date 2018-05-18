@@ -1,12 +1,12 @@
 <template>
   <div class="detail padding-bottom-16">
     <header></header>
-    <detail-chunk></detail-chunk>
+    <detail-chunk :topic="topic"></detail-chunk>
     <div class="total-reply">
-      <text class="txt">3条回复</text>
+      <text class="txt">{{topic.reply_count}}条回复</text>
     </div>
-    <reply></reply>
-    <reply></reply>
+    <reply :replies="replies"></reply>
+    
   </div>
 
 </template>
@@ -15,6 +15,7 @@
 import header from "../components/Header1.vue";
 import detailChunk from "../components/DetailChunk.vue";
 import reply from "../components/Reply.vue";
+import * as apis from "../api/index";
 
 export default {
   components: {
@@ -23,11 +24,25 @@ export default {
     reply
   },
   data() {
-    return {};
+    return {
+      topic:{},
+      replies:[]
+    };
   },
   computed: {},
-  mounted() {},
-  methods: {}
+  mounted() {
+     let params = this.$route.query.id;
+    this.getList(params);
+  },
+  methods: {
+    getList: function(params) {
+      let _this = this;
+      apis.getTopic(params, function(retdata) {
+        _this.topic = retdata.data;     
+        _this.replies = retdata.data.replies;     
+      });
+    },
+  }
 };
 </script>
 

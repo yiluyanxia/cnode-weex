@@ -3,9 +3,12 @@
 /* weex initialized here, please do not move this line */
 const router = require('./router');
 const App = require('@/index.vue');
+const filters = require('@/config/filters')
 
-// import '@/assets/css/styles.css'
 /* eslint-disable no-new */
+
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) // 注册过滤器
+
 new Vue(Vue.util.extend({ el: '#root', router }, App));
 router.push('/');
 

@@ -22,6 +22,18 @@
 .padding-bottom-16{
   padding-bottom: 16px;
 }
+.padding-top-16{
+  padding-top: 16px;
+}
+.margin-top-16{
+  margin-top: 16px;
+}
+.border-top{
+  border-top: 1px solid #dbdbdb
+}
+.border-bottom{
+  border-bottom: 1px solid #dbdbdb
+}
 .bg-fff{
   background-color: #fff;  
 }
@@ -32,6 +44,7 @@
   width: 94px;
   height: 94px;
   border-radius: 100%;
+  background-color: #fff;
 }
 .flex-1{
   flex-direction: row;

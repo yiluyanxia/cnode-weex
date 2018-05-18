@@ -10,12 +10,12 @@ Vue.use(Router)
 module.exports = new Router({
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
       component: Home
     },
     {
-      path: '/',
+      path: '/detail',
       name: 'Detail',
       component: Detail
     }
