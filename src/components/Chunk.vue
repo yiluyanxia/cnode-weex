@@ -1,6 +1,6 @@
 <template>
   <list class="chunk">
-    <cell v-if="topicsList" class="item" v-for="topic in topicsList">
+    <cell v-if="topics" class="item" v-for="topic in topics">
       <div class="head">
 
         <div class="tag" :class="matchTab(topic.tab, topic.top, topic.good, true)">{{matchTab(topic.tab, topic.top, topic.good, false)}}</div>
@@ -41,22 +41,23 @@ import * as apis from "../api/index";
 import util from "../config/util";
 
 export default {
+  props:["topics"],
   data() {
     return {
       getResult: "loading...",
-      paging: {
-        page: 1,
-        limit: 10,
-        tab: "all",
-        mdrender: false
-      },
-      topicsList: []
+      // paging: {
+      //   page: 1,
+      //   limit: 10,
+      //   tab: "all",
+      //   mdrender: false
+      // },
+      // topicsList: []
     };
   },
   computed: {},
   mounted() {
     // this.getTopices();
-    this.getList();
+    // this.getList();
   },
   methods: {
     linkTo(tId) {
@@ -69,13 +70,13 @@ export default {
     matchTab(tab, good, top, isClass) {
       return util.matchTab(tab, good, top, isClass);
     },
-    getList: function(params) {
-      let _this = this;
-      var params = this.paging;
-      apis.getTopics(params, function(retdata) {
-        _this.topicsList = retdata.data;
-      });
-    },
+    // getList: function(params) {
+    //   let _this = this;
+    //   var params = this.paging;
+    //   apis.getTopics(params, function(retdata) {
+    //     _this.topicsList = retdata.data;
+    //   });
+    // },
 
 
     getTopices() {

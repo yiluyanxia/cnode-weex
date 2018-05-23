@@ -1,7 +1,6 @@
 <template>
-  <!-- <div class="side-bg" @click="close" v-if="isShow"> -->
-
-    <div class="side bg-fff" :class="{'show': isShow}">
+  <div class="popbg" v-if="isShowVal" @click="hideSide">
+    <div class="side bg-fff" :class="{'show': isShowVal}">
       <div class="head padding-30">
         <div class="tool flex-flex">
           <text class="icon">&#xe60d;</text>
@@ -17,21 +16,21 @@
       </div>
       <div class="list padding-top-16">
 
-        <div class="item flex-flex active" @click="linkTo('all')">
+        <div class="item flex-flex" :class="[isActive('all')]"  @click="linkTo('all')">
           <text class="icon">&#xe639;</text>
           <text class="txt">全部</text>
         </div>
-        <div class="item flex-flex" @click="linkTo('good')">
+        <div class="item flex-flex" :class="[isActive('good')]"  @click="linkTo('good')">
           <text class="icon">&#xe60c;</text>
           <text class="txt">精华</text>
         </div>
 
-        <div class="item flex-flex" @click="linkTo">
+        <div class="item flex-flex" :class="[isActive('ask')]" @click="linkTo('ask')">
           <text class="icon">&#xe639;</text>
           <text class="txt">问答</text>
         </div>
 
-        <div class="item flex-flex border-bottom" @click="linkTo('job')">
+        <div class="item flex-flex border-bottom" :class="[isActive('job')]" @click="linkTo('job')">
           <text class="icon">&#xe785;</text>
           <text class="txt">招聘</text>
         </div>
@@ -41,51 +40,70 @@
           <text class="txt">消息</text>
         </div>
 
-         <div class="item flex-flex">
+        <div class="item flex-flex">
           <text class="icon">&#xe6e8;</text>
           <text class="txt">设置</text>
         </div>
 
-         <div class="item flex-flex">
+        <div class="item flex-flex">
           <text class="icon">&#xe61e;</text>
           <text class="txt">关于</text>
         </div>
 
       </div>
     </div>
+  </div>
 
-  <!-- </div> -->
 
 </template>
 
+
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  props:["isShow"],
   data() {
     return {
-      isShowSide: false
+      isShow: false,
+      activeKey: "all"
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["side"]),
+    isShowVal() {
+      return this.side.isShow;
+    }
+  },
   mounted() {},
   methods: {
-    close(){
-      this.isShowSide = false
+    hideSide() {
+      this.$store.dispatch("hideSide");
     },
-    linkTo(){
-      let _this = this;
-      _this.isShowSide = false
-      console.log('this.isShowSide')
-      console.log( _this.isShowSide)
-    
+    isActive(aKey) {
+      return this.activeKey === aKey ? "active" : "";
+      
+    },
+    linkTo(tab) {
+      if (this.activeKey === tab) return;
+      this.activeKey = tab;
+      this.$emit("switchTab", tab);
+      this.$store.dispatch("hideSide");
+      
     }
-
   }
 };
 </script>
 
 <style scoped>
-
+.popbg {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 750px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
 .side {
   width: 618px;
   overflow: hidden;
@@ -94,65 +112,80 @@ export default {
   left: -618px;
   top: 0;
   bottom: 0;
-  transition: all .3s;
-}
-.side.show{
-  left: 0;
-}
-.head{
-  background: linear-gradient(to right, #80bd01,  #6ba44e)
+  transition: all 1s;
 }
 
-.tool{
- justify-content: space-between;
+.side.show {
+  left: 0;
 }
-.tool .icon{
+
+.head {
+  background: linear-gradient(to right, #80bd01, #6ba44e);
+}
+
+.tool {
+  justify-content: space-between;
+}
+
+.tool .icon {
   color: #fff;
 }
-.logout{
+
+.logout {
   color: #fff;
   /* padding: 0 30px; */
 }
-.avatarbox .avatar{
+
+.avatarbox .avatar {
   margin: 0 auto;
 }
-.info .name, .info .score{
+
+.info .name,
+.info .score {
   text-align: center;
 }
-.info .score{
+
+.info .score {
   padding-top: 10px;
 }
-.side .avatar{
+
+.side .avatar {
   width: 100px;
   height: 100px;
 }
 
-.info .name{
+.info .name {
   color: #fff;
-  font-size: 36px
+  font-size: 36px;
 }
-.score{
+
+.score {
   color: #fff;
-  font-size: 30px  
+  font-size: 30px;
 }
-.list .item{
+
+.list .item {
   height: 104px;
   justify-content: flex-start;
   padding: 0 30px;
 }
-.list .item .icon{
+
+.list .item .icon {
   font-size: 40px;
 }
-.list .item .txt{
+
+.list .item .txt {
   padding-left: 50px;
   font-size: 32px;
   color: #333;
 }
-.list .item.active{
+
+.list .item.active {
   background-color: #eee;
 }
-.list .item.active .icon, .list .item.active .txt{
+
+.list .item.active .icon,
+.list .item.active .txt {
   color: #80bd01;
 }
-
 </style>
