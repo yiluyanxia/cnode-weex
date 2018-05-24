@@ -1,5 +1,5 @@
 <template>
-  <div class="header-wrap">
+  
     <div class="header">
       <div class="iconbox" @click="showSide">
         <text class="icon menu">&#xe653;</text>
@@ -8,7 +8,7 @@
         <text class="txt">Cnode</text>
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -51,7 +51,8 @@ export default {
 }
 
 .iconbox {
-  padding: 0 30px;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 .header .txtbox {

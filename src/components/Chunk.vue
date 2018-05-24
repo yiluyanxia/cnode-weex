@@ -1,6 +1,6 @@
 <template>
   <list class="chunk">
-    <cell v-if="topics" class="item" v-for="topic in topics">
+    <cell class="item" v-for="topic in topicsList">
       <div class="head">
 
         <div class="tag" :class="matchTab(topic.tab, topic.top, topic.good, true)">{{matchTab(topic.tab, topic.top, topic.good, false)}}</div>
@@ -22,7 +22,7 @@
       </div>
       <div class="info">
         <div class="user">
-          <image class="avatar" :src="topic.author.avatar_url"></image>
+          <image class="avatar" v-if="topic.author.avatar_url" :src="topic.author.avatar_url"></image>
           <text class="name">{{topic.author.loginname}}</text>
         </div>
 
@@ -39,24 +39,25 @@
 <script>
 import * as apis from "../api/index";
 import util from "../config/util";
+var stream = weex.requireModule('stream');
 
 export default {
-  props:["topics"],
+  // props:["topics"],
   data() {
     return {
       getResult: "loading...",
-      // paging: {
-      //   page: 1,
-      //   limit: 10,
-      //   tab: "all",
-      //   mdrender: false
-      // },
-      // topicsList: []
+      paging: {
+        page: 1,
+        limit: 10,
+        tab: "all",
+        mdrender: false
+      },
+      topicsList: []
     };
   },
   computed: {},
   mounted() {
-    // this.getTopices();
+    this.getTopices();
     // this.getList();
   },
   methods: {
@@ -95,7 +96,7 @@ export default {
             _this.getResult = "request failed";
           } else {
             console.log("get:" + ret);
-            _this.getResult = JSON.stringify(ret.data);
+            _this.topicsList = JSON.stringify(ret.data);
           }
         },
         function(response) {

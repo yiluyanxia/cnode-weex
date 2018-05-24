@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <chunk :topics="topicsList"></chunk>
+    <!-- <chunk :topics="topicsList"></chunk> -->
+    <chunk></chunk>
     <home-head></home-head>
     <side @switchTab="switchTabFun"></side>
   </div>
@@ -33,7 +34,7 @@ export default {
   },
   computed: {},
   mounted() {
-    this.getList();
+    // this.getList();
   },
   methods: {
     switchTabFun(data) {
@@ -43,11 +44,12 @@ export default {
     },
     getList(params) {
       let _this = this;
-      var params = this.paramsKey;
+      params = this.paramsKey;
       apis.getTopics(params, function(retdata) {
         _this.topicsList = retdata.data;
       });
     }
+
   }
 };
 </script>
@@ -55,7 +57,7 @@ export default {
 <style scoped>
 .wrapper {
   width: 750px;
-  background-color: rgb(239, 239, 239);
+  background-color: #efefef;
   position: relative;
   padding-top: 120px;
 }

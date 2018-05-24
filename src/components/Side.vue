@@ -6,13 +6,16 @@
           <text class="icon">&#xe60d;</text>
           <text class="logout">注销</text>
         </div>
-        <div class="avatarbox padding-30">
-          <image class="avatar" src="https://vuejs.org/images/logo.png"></image>
+        <div class="avatarbox padding-30" @click="toLogin"> 
+          <image class="avatar" src="https://cnodejs.org/public/images/cnodejs.svg"></image>
         </div>
         <div class="info padding-top-20">
+          <text class="name">点击头像登录</text>
+        </div>
+        <!-- <div class="info padding-top-20">
           <text class="name">yiluyanxia</text>
           <text class="score">积分：10</text>
-        </div>
+        </div> -->
       </div>
       <div class="list padding-top-16">
 
@@ -81,14 +84,17 @@ export default {
     },
     isActive(aKey) {
       return this.activeKey === aKey ? "active" : "";
-      
     },
     linkTo(tab) {
       if (this.activeKey === tab) return;
       this.activeKey = tab;
       this.$emit("switchTab", tab);
       this.$store.dispatch("hideSide");
-      
+    },
+    toLogin() {
+      this.$router.push({
+        path: "/login",
+      });
     }
   }
 };
@@ -150,8 +156,8 @@ export default {
 }
 
 .side .avatar {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
 
 .info .name {
